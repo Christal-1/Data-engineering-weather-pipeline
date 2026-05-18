@@ -3,41 +3,51 @@ import pandas as pd
 import sys
 import os
 
-# ✅ FIX IMPORT PATH (THIS IS THE KEY FIX)
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+# ✅ FIX PROJECT ROOT PATH
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(ROOT_DIR)
 
-# ✅ Now imports will work
-from scripts.ingest import main as run_ingest
-from scripts.transform import main as run_transform
+# ✅ SAFE IMPORTS (with fallback debug)
+try:
+    from scripts.ingest import main as run_ingest
+    from scripts.transform import main as run_transform
+    PIPELINE_AVAILABLE = True
+except Exception as e:
+    st.error(f"Import error: {e}")
+    PIPELINE_AVAILABLE = False
 
 
 # Page config
 st.set_page_config(page_title="Weather Dashboard")
 
-# Title
 st.title("🌦️ Live Weather Dashboard")
 st.write("Real-time weather data powered by OpenWeather API")
 
 
-# ✅ RUN PIPELINE
-try:
-    if "pipeline_ran" not in st.session_state:
-        run_ingest()
-        run_transform()
-        st.session_state.pipeline_ran = True
-except Exception as e:
-    st.warning(f"Pipeline error: {e}")
+# ✅ RUN PIPELINE ONLY IF IMPORT WORKS
+if PIPELINE_AVAILABLE:
+    try:
+        if "pipeline_ran" not in st.session_state:
+            run_ingest()
+            run_transform()
+            st.session_state.pipeline_ran = True
+    except Exception as e:
+        st.error(f"Pipeline failed: {e}")
+else:
+    st.warning("Pipeline modules not available")
 
 
-# ✅ Load data
+# ✅ LOAD DATA
+DATA_PATH = os.path.join(ROOT_DIR, "data", "transformed_weather.csv")
+
 try:
-    df = pd.read_csv("data/transformed_weather.csv")
+    df = pd.read_csv(DATA_PATH)
 except FileNotFoundError:
-    st.error("No data found. Pipeline failed to run.")
+    st.error("No data found. Pipeline not generating data.")
     st.stop()
 
 
-# ✅ Process data
+# ✅ PROCESS DATA
 if "timestamp" in df.columns:
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     df = df.sort_values(by="timestamp", ascending=False)
@@ -47,12 +57,12 @@ if "temperature_c" in df.columns:
     df["temperature_c"] = df["temperature_c"].round(2)
 
 
-# ✅ Show last updated
+# ✅ SHOW UPDATED TIME
 if not df.empty:
     st.caption(f"Last updated: {df['timestamp'].iloc[0]}")
 
 
-# ✅ Clean UI names
+# ✅ CLEAN DISPLAY
 df_display = df.rename(columns={
     "city": "City",
     "temperature": "Temperature (K)",
@@ -61,12 +71,12 @@ df_display = df.rename(columns={
 })
 
 
-# ✅ Table
+# ✅ TABLE
 st.subheader("Latest Weather Data")
 st.dataframe(df_display)
 
 
-# ✅ Chart
+# ✅ CHART
 st.subheader("Temperature (°C)")
 
 if len(df_display) > 0:
@@ -75,6 +85,6 @@ else:
     st.warning("No data available.")
 
 
-# ✅ Footer
+# ✅ FOOTER
 st.markdown("---")
 st.caption("Built by Christal Haines 🚀")
