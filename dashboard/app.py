@@ -5,6 +5,8 @@ from datetime import datetime
 import pytz
 import sys
 import os
+import time
+
 
 # ✅ FIX PROJECT ROOT PATH (VERY IMPORTANT)
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -66,3 +68,8 @@ except Exception as e:
 
 st.markdown("---")
 st.caption("Built by Christal Haines ")
+
+# Auto update
+time.sleep(5)
+st.rerun()
+
