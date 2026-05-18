@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import requests
 from datetime import datetime
+import pytz
+
 from config.config import API_KEY, CITY
 
 st.set_page_config(page_title="Weather Dashboard")
