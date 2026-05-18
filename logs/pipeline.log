@@ -1,0 +1,23 @@
+2026-05-13 10:05:22,889 - ERROR - Ingestion failed: 'main'
+2026-05-13 10:16:08,736 - INFO - Data ingestion successful
+2026-05-13 10:16:45,983 - INFO - Transformation successful
+2026-05-13 10:25:03,699 - ERROR - Ingestion failed: table weather has 2 columns but 3 values were supplied
+2026-05-13 10:25:32,433 - ERROR - Ingestion failed: table weather has 2 columns but 3 values were supplied
+2026-05-13 10:26:05,133 - ERROR - Ingestion failed: table weather has 2 columns but 3 values were supplied
+2026-05-13 10:26:10,188 - INFO - Transformation successful
+2026-05-13 10:31:37,813 - INFO - Transformation successful
+2026-05-13 10:35:40,630 - ERROR - Ingestion failed: table weather has 2 columns but 3 values were supplied
+2026-05-13 10:35:57,517 - INFO - Transformation successful
+2026-05-13 10:37:06,035 - INFO - Data ingestion successful
+2026-05-13 10:37:09,159 - INFO - Transformation successful
+2026-05-13 10:41:33,208 - INFO - Data ingestion successful
+2026-05-13 10:41:34,431 - INFO - Transformation successful
+2026-05-15 08:39:11,366 - INFO - Data ingestion successful
+2026-05-15 08:42:30,758 - INFO - Data ingestion successful
+2026-05-18 10:23:40,348 - ERROR - Ingestion failed: name 'CITY' is not defined
+2026-05-18 10:24:00,827 - ERROR - Ingestion failed: name 'CITY' is not defined
+2026-05-18 10:24:03,476 - ERROR - Transformation failed: name 'DB_NAME' is not defined
+2026-05-18 10:28:19,196 - INFO - Data ingestion successful
+2026-05-18 10:28:21,968 - INFO - Transformation successful
+2026-05-18 10:35:08,844 - INFO - Data ingestion successful
+2026-05-18 10:35:11,557 - INFO - Transformation successful
