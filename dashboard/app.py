@@ -8,11 +8,11 @@ import os
 import time
 
 
-# ✅ FIX PROJECT ROOT PATH (VERY IMPORTANT)
+#  FIX PROJECT ROOT PATH (VERY IMPORTANT)
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(ROOT_DIR)
 
-# ✅ NOW import works
+#  NOW import works
 from config.config import API_KEY, CITY
 
 
@@ -24,7 +24,7 @@ st.title("🌦️ Live Weather Dashboard")
 st.write("Real-time weather data powered by OpenWeather API")
 
 
-# ✅ FETCH DATA LIVE
+#  FETCH DATA LIVE
 def fetch_weather():
     url = f"http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}"
     response = requests.get(url, timeout=10)
@@ -42,7 +42,7 @@ try:
     temp_k = data["main"]["temp"]
     temp_c = round(temp_k - 273.15, 2)
 
-    # ✅ LOCAL TIME (South Africa)
+    #  LOCAL TIME (South Africa)
     sa_tz = pytz.timezone("Africa/Johannesburg")
     timestamp = datetime.now(sa_tz)
 
