@@ -12,7 +12,6 @@ import time
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.append(ROOT_DIR)
 
-#  NOW import works
 from config.config import API_KEY, CITY
 
 
