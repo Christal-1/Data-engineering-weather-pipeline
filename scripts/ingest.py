@@ -13,11 +13,11 @@ def fetch_weather():
     """Fetch weather data from OpenWeather API"""
     try:
         url = f"http://api.openweathermap.org/data/2.5/weather?q={CITY}&appid={API_KEY}"
-        response = requests.get(url, timeout=10)  # ✅ add timeout
+        response = requests.get(url, timeout=10)  # add timeout
 
         data = response.json()
 
-        # ✅ Validate response properly
+        # Validate response properly
         if response.status_code != 200 or "main" not in data:
             raise Exception(f"API Error: {data}")
 
